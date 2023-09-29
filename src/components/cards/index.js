@@ -10,7 +10,7 @@ import logo from '../../assets/pngtree-venus-planet-isolated-on-white-background
 import './style.css';
 
 function Cards() {
-    const [modalShow, setModalShow] = useState();
+    const [modalShow, setModalShow] = useState(false);
 
     const handleModal = (e) => {
         setModalShow(true);
@@ -21,9 +21,9 @@ function Cards() {
     }
 
     return (
-        <Row onClick={e => handleModal(e)} xs={1} sm={2} md={2} lg={3} xl={4} className="g-4">
+        <Row xs={1} sm={2} md={2} lg={3} xl={4} className="g-4">
             {Array.from({ length: 12 }).map((_, idx) => (
-                <Col key={idx}>
+                <Col key={idx} onClick={e => handleModal(e)}>
                     <Card className='card-container mx-auto'>
                         <Card.Img variant="top" src={logo} />
                         <Card.Body>
@@ -33,7 +33,7 @@ function Cards() {
                     </Card>
                 </Col>
             ))}
-            <CardDetail modalShow={modalShow} setModalShow={setModalShow} closeModal={handleCloseModal} />
+            <CardDetail modalShow={modalShow} onClose={handleCloseModal} />
         </Row>
 
     );
