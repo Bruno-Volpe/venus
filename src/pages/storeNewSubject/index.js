@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form } from 'react-bootstrap';
 import Nav from '../../components/nav';
 
-import { collection, query, where, onSnapshot, addDoc, updateDoc, deleteDoc, getDocs } from "firebase/firestore"
-import db from '../../service/firebaseConnection';
+import { collection, addDoc } from "firebase/firestore";
+import db, { auth } from '../../service/firebaseConnection';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './style.css';
 
@@ -13,33 +16,46 @@ function App() {
     const [techerEmail, setTecherEmail] = useState('');
     const [formula, setFormula] = useState('');
 
-    //TODO: fazer um form validate
-    const formValidate = () => {
-        return true;
-    }
+    //TODO: criar notas
+    //TODO: criar imagem
 
-    //TODO: fazer partes das notas
+    const formValidate = () => {
+        let errorMessage = '';
+
+        if (subjectName === '' || techerName === '' || techerEmail === '' || formula === '') {
+            errorMessage = 'Preencha todos os campos';
+        }
+
+        return errorMessage;
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (formValidate()) {
+        const errorMessage = formValidate();
+
+        if (errorMessage === '') {
             try {
                 await addDoc(collection(db, "subject"), {
                     subjectName,
                     techerEmail,
                     techerName,
-                    formula
+                    formula,
+                    userId: auth.currentUser.uid
                 });
-                window.alert('Evento adicionado com sucesso!')
+                toast.success('Matéria adicionada com sucesso!');
+                setFormula('');
+                setSubjectName('');
+                setTecherEmail('');
+                setTecherName('');
             } catch (err) {
-                window.alert("Erro ao adicionar evento, tente novamente mais tarde");
-            } finally {
-                return
+                toast.error('Erro ao adicionar matéria. Tente novamente mais tarde.');
             }
+        } else {
+            toast.warning(errorMessage);
         }
-        alert('Formulario invalido')
     }
+
     return (
         <>
             <Nav />
@@ -48,7 +64,7 @@ function App() {
                     <Col col='12' md='8' className='add-subject-form d-flex align-items-center justify-content-center flex-column'>
                         <h1 className="text-center mt-5">Adicione</h1>
                         <h5 className="text-center mb-3">nova materia</h5>
-                        <Form onSubmit={e => handleSubmit(e)} style={{ maxWidth: '400px', width: '100%' }}>
+                        <Form onSubmit={handleSubmit} style={{ maxWidth: '400px', width: '100%' }}>
                             <Form.Group className="mt-5 mb-3">
                                 <Form.Control onChange={e => setSubjectName(e.target.value)} value={subjectName} placeholder="Nome Materia" />
                             </Form.Group>
