@@ -43,8 +43,8 @@ function App() {
     return (
         <>
             <Nav />
-            <Container className='meio'>
-                <Row className="row mt-5">
+            <Container className='meio-forms'>
+                <Row className="row-forms mt-5">
                     <Col col='12' md='8' className='add-subject-form d-flex align-items-center justify-content-center flex-column'>
                         <h1 className="text-center mt-5">Adicione</h1>
                         <h5 className="text-center mb-3">nova materia</h5>
