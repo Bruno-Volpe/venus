@@ -1,0 +1,8 @@
+.search-image {
+    cursor: pointer;
+}
+
+.selected-image {
+    border: 2px solid #EB5E28;
+    border-radius: 5px;
+}

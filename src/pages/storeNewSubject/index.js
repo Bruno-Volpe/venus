@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import Nav from '../../components/nav';
+import SearchImages from '../../components/searchImage';
 
 import { collection, addDoc } from "firebase/firestore";
 import db, { auth } from '../../service/firebaseConnection';
@@ -87,6 +88,7 @@ function App() {
                             </button>
                         </Form>
                     </Col>
+                    <SearchImages />
                 </Row>
             </Container>
         </>
