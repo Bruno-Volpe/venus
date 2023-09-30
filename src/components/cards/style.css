@@ -10,8 +10,13 @@
     padding: 36px;
 }
 
+.row-cards {
+    width: 100%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
 .background-card {
-    background-color: black;
-    height: 100px;
-    max-height: 150px;
+    margin-top: 0;
 }

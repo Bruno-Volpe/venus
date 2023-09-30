@@ -38,7 +38,7 @@ function App() {
         <>
             {load && (
                 <Container fluid className="meio">
-                    <Row className='row'>
+                    <Row className='row-login'>
                         <Col col='12' md='6' className='login-form d-flex align-items-center justify-content-center'>
                             <div className='text-center' >
                                 <img src={logo} alt="logo" className="img-fluid" />

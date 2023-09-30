@@ -6,7 +6,9 @@
     width: 100%;
     height: auto;
     align-items: start;
+    text-align: center;
     justify-content: center;
+    margin-left: 0 !important;
   }
   
 .add-subject-form input {
