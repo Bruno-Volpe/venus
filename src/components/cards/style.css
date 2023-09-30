@@ -1,7 +1,7 @@
 .card-container {
     background-color: #FFFCF2 !important;
     max-width: 300px;
-    max-height: 600px;
+    height: 400px !important;
     margin: 4rem 4rem 0 4rem; /* Adiciona margens ao redor dos cards */
     cursor: pointer;
 }

@@ -53,13 +53,13 @@ const SearchImages = () => {
 
     return (
         <div>
-            <input
+            {/* <input
                 type="text"
                 value={query}
                 onChange={e => setQuery(e.target.value)}
                 placeholder="Pesquisar Imagens"
             />
-            <button onClick={searchImages}>Pesquisar</button>
+            <button onClick={searchImages}>Pesquisar</button> */}
             <Modal show={showModal} onHide={() => setShowModal(false)} size="xl">
                 <Modal.Header closeButton>
                     <Modal.Title>Escolha uma imagem</Modal.Title>

@@ -44,7 +44,7 @@ function Cards() {
                 subjects.map((subject, idx) => (
                     <Col key={idx}>
                         <Card onClick={e => handleModal(e)} className='card-container mx-auto'>
-                            <Card.Img variant="top" className='background-card' src={logo} />
+                            <Card.Img variant="top" className='background-card' src={subject.imageUrl || logo} />
                             <Card.Body className='body-card' >
                                 <Card.Title>{subject.subjectName}</Card.Title>
                                 <Card.Text>Professor: {subject.techerName}</Card.Text>

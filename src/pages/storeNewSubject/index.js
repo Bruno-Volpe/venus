@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import Nav from '../../components/nav';
-import SearchImages from '../../components/searchImage';
+import resizeImage from '../../util/resizeImg'; // Importando a função
+// import SearchImages from '../../components/searchImage';
 
 import { collection, addDoc } from "firebase/firestore";
-import db, { auth } from '../../service/firebaseConnection';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import db, { auth, storage } from '../../service/firebaseConnection';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,7 +17,9 @@ function App() {
     const [subjectName, setSubjectName] = useState('');
     const [techerName, setTecherName] = useState('');
     const [techerEmail, setTecherEmail] = useState('');
-    const [formula, setFormula] = useState('');
+    const [media, setmedia] = useState('');
+    const [selectedFile, setSelectedFile] = useState(null);
+
 
     //TODO: criar notas
     //TODO: criar imagem
@@ -23,32 +27,49 @@ function App() {
     const formValidate = () => {
         let errorMessage = '';
 
-        if (subjectName === '' || techerName === '' || techerEmail === '' || formula === '') {
+        if (subjectName === '' || techerName === '' || techerEmail === '' || media === '') {
             errorMessage = 'Preencha todos os campos';
         }
+
+        if (typeof media !== 'number') {
+            try {
+                parseFloat(media)
+            } catch (err) {
+                errorMessage = 'A média deve ser um número';
+            }
+        };
+
 
         return errorMessage;
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const errorMessage = formValidate();
 
         if (errorMessage === '') {
             try {
-                await addDoc(collection(db, "subject"), {
-                    subjectName,
-                    techerEmail,
-                    techerName,
-                    formula,
-                    userId: auth.currentUser.uid
-                });
-                toast.success('Matéria adicionada com sucesso!');
-                setFormula('');
-                setSubjectName('');
-                setTecherEmail('');
-                setTecherName('');
+                if (selectedFile) {
+                    const resizedFile = await resizeImage(selectedFile); // Utilizando a função
+
+                    const storageRef = ref(storage, `images/${resizedFile.name}`);
+                    await uploadBytes(storageRef, resizedFile);
+                    const imageUrl = await getDownloadURL(storageRef);
+
+                    await addDoc(collection(db, "subject"), {
+                        subjectName,
+                        techerEmail,
+                        techerName,
+                        media,
+                        formula: '',
+                        imageUrl,
+                        userId: auth.currentUser.uid,
+                    });
+
+                    toast.success('Matéria adicionada com sucesso!');
+                } else {
+                    toast.warning('Selecione uma imagem');
+                }
             } catch (err) {
                 toast.error('Erro ao adicionar matéria. Tente novamente mais tarde.');
             }
@@ -56,6 +77,7 @@ function App() {
             toast.warning(errorMessage);
         }
     }
+
 
     return (
         <>
@@ -67,28 +89,40 @@ function App() {
                         <h5 className="text-center mb-3">nova materia</h5>
                         <Form onSubmit={handleSubmit} style={{ maxWidth: '400px', width: '100%' }}>
                             <Form.Group className="mt-5 mb-3">
-                                <Form.Control onChange={e => setSubjectName(e.target.value)} value={subjectName} placeholder="Nome Materia" />
+                                <Form.Control required onChange={e => setSubjectName(e.target.value)} value={subjectName} placeholder="Nome Materia" />
                             </Form.Group>
 
                             <Form.Group className="mb-3">
-                                <Form.Control onChange={e => setTecherName(e.target.value)} value={techerName} placeholder="Nome professor" />
+                                <Form.Control required onChange={e => setTecherName(e.target.value)} value={techerName} placeholder="Nome professor" />
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Control onChange={e => setTecherEmail(e.target.value)} value={techerEmail} type="email" placeholder="Email professor" />
+                                <Form.Control required onChange={e => setTecherEmail(e.target.value)} value={techerEmail} type="email" placeholder="Email professor" />
                             </Form.Group>
 
                             <Form.Group className="mb-3">
-                                <Form.Control onChange={e => setFormula(e.target.value)} value={formula} placeholder="Formula da disciplinas" />
-                                <Form.Text className="text-muted">Considere trabalhos, provas. Tudo que vale nota</Form.Text>
+                                <Form.Control required type='number' onChange={e => setmedia(e.target.value)} value={media} placeholder="media da disciplinas" />
                             </Form.Group>
+
+                            <Form.Group className="mb-3">
+                                <Form.Label className="mb-1 me-3">Selecione Imagem</Form.Label>
+                                <Form.Control
+                                    type="file"
+                                    required
+                                    accept="image/*"
+                                    placeholder='Escolha imagem'
+                                    name="file"
+                                    style={{ height: '100%' }}
+                                    onChange={(e) => setSelectedFile(e.target.files[0])} // Atualiza o estado quando um arquivo é selecionado
+                                />
+                            </Form.Group>
+
 
                             <button type="submit" className="w-100 mt-5">
                                 Submit
                             </button>
                         </Form>
                     </Col>
-                    <SearchImages />
                 </Row>
             </Container>
         </>
