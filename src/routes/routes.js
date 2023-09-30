@@ -3,6 +3,7 @@ import PrivateRoute from './privateRoutes';
 
 import Login from '../pages/login/';
 import DashBoard from '../pages/dashBoard/';
+import StoreNewSubject from '../pages/storeNewSubject/';
 import NotFound from '../pages/error/';
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
                 <Route index path="/login" element={<Login />} />
 
                 <Route index path='/' element={<PrivateRoute> <DashBoard /> </PrivateRoute>} />
+                <Route index path='/storeNewSubject' element={<PrivateRoute> <StoreNewSubject /> </PrivateRoute>} />
 
                 <Route path='*' element={<NotFound />} />
 

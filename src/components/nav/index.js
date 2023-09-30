@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Image from 'react-bootstrap/Image';
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +16,8 @@ import logo from '../../assets/pngtree-venus-planet-isolated-on-white-background
 import './style.css';
 
 function App() {
+    const [modalShow, setModalShow] = useState(false);
+
     const user = auth.currentUser;
     const displayName = user ? user.displayName : '';
 
@@ -37,10 +40,10 @@ function App() {
                         <NavDropdown.Item href="#action/3.1">Modo1</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Modo2</NavDropdown.Item>
                     </NavDropdown>
-                    <Navbar.Text className="button">
+                    <Nav.Link href='/storeNewSubject' className="button">
                         <FontAwesomeIcon icon={faPlus} />
                         Add new subject
-                    </Navbar.Text>
+                    </Nav.Link>
                 </Nav>
 
                 <Navbar.Collapse id="responsive-navbar-nav">

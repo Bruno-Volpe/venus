@@ -23,8 +23,8 @@ function Cards() {
     return (
         <Row xs={1} sm={2} md={2} lg={3} xl={4} className="g-4">
             {Array.from({ length: 12 }).map((_, idx) => (
-                <Col key={idx} onClick={e => handleModal(e)}>
-                    <Card className='card-container mx-auto'>
+                <Col key={idx}>
+                    <Card onClick={e => handleModal(e)} className='card-container mx-auto'>
                         <Card.Img variant="top" src={logo} />
                         <Card.Body>
                             <Card.Title>Materia</Card.Title>
