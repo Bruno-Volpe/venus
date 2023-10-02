@@ -25,7 +25,6 @@ function App() {
     const handleLogin = (e) => {
         signInWithRedirect(auth, provider)
             .then((result) => {
-                //TODO: setar local stroage
                 navigate('/', { replace: true })
             })
             .catch((error) => {

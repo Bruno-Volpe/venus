@@ -1,0 +1,15 @@
+.forms-card-detail input {
+    background-color: #FFFCF2;
+    border-radius: 6px;
+    margin-bottom: 24px;
+    transition: border 0.2s; /* Adicione uma transição suave para a borda */
+}
+
+.input-center {
+    text-align: center;
+}
+
+.forms-card-detail input:focus {
+    background-color: #FFFCF2 !important;
+    border: 1px solid #000; /* Adicione a borda quando estiver em foco */
+}

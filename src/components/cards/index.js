@@ -1,27 +1,29 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import CardDetail from '../cardDetail';
-import Placeholder from 'react-bootstrap/Placeholder'; // Importe o componente de placeholder
-
-import logo from '../../assets/pngtree-venus-planet-isolated-on-white-background-png-image_4682545.png';
-
+import Placeholder from 'react-bootstrap/Placeholder';
+import { useNavigate } from 'react-router-dom';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import db, { auth } from '../../service/firebaseConnection';
-
 import './style.css';
 
 function Cards() {
     const [modalShow, setModalShow] = useState(false);
     const [subjects, setSubjects] = useState([]);
+    const [actualSubject, setActualSubject] = useState();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadSubjects = async () => {
             try {
                 const q = query(collection(db, "subject"), where("userId", "==", auth.currentUser.uid));
                 const querySnapshot = await getDocs(q);
-                const subjectData = querySnapshot.docs.map(doc => doc.data());
+                const subjectData = querySnapshot.docs.map(doc => ({
+                    id: doc.id,  // Adicionando o ID do documento ao objeto
+                    ...doc.data()
+                }));
                 setSubjects(subjectData);
             } catch (err) {
                 console.log(err);
@@ -31,12 +33,8 @@ function Cards() {
         loadSubjects();
     }, []);
 
-    const handleModal = (e) => {
-        setModalShow(true);
-    }
-
-    const handleCloseModal = () => {
-        setModalShow(false);
+    const handleCardClick = (id) => {
+        navigate(`/cardDetails/${id}`);
     }
 
     return (
@@ -44,7 +42,7 @@ function Cards() {
             {subjects.length > 0 ? (
                 subjects.map((subject, idx) => (
                     <Col key={idx}>
-                        <Card onClick={e => handleModal(e)} className='card-container mx-auto'>
+                        <Card className='card-container mx-auto' onClick={() => handleCardClick(subject.id)}>
                             {subject.imageUrl ? (
                                 <Card.Img variant="top" className='background-card' src={subject.imageUrl} />
                             ) : (
@@ -59,10 +57,9 @@ function Cards() {
                 ))
             ) : (
                 <Col xs={12} className='mt-5 text-center'>
-                    Add news subjects...
+                    Adicione novas matérias...
                 </Col>
             )}
-            <CardDetail modalShow={modalShow} onClose={handleCloseModal} />
         </Row>
     );
 }

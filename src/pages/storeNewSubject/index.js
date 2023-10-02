@@ -21,8 +21,9 @@ function App() {
     const [selectedFile, setSelectedFile] = useState(null);
 
 
-    //TODO: criar notas
+    //TODO: criar notas 
     //TODO: criar imagem
+    //TODO: criar formula -> MathJax
 
     const formValidate = () => {
         let errorMessage = '';

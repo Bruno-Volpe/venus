@@ -5,6 +5,7 @@ import Login from '../pages/login/';
 import DashBoard from '../pages/dashBoard/';
 import StoreNewSubject from '../pages/storeNewSubject/';
 import NotFound from '../pages/error/';
+import CardDetails from '../pages/CardDetails';
 
 export default function App() {
     return (
@@ -14,6 +15,7 @@ export default function App() {
 
                 <Route index path='/' element={<PrivateRoute> <DashBoard /> </PrivateRoute>} />
                 <Route index path='/storeNewSubject' element={<PrivateRoute> <StoreNewSubject /> </PrivateRoute>} />
+                <Route index path='/cardDetails/:id' element={<PrivateRoute> <CardDetails /> </PrivateRoute>} />
 
                 <Route path='*' element={<NotFound />} />
 
