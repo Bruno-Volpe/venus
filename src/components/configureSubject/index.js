@@ -1,26 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
+import MathInput from '../formula';
+
+import { doc, updateDoc } from "firebase/firestore";
+import db, { auth, storage } from '../../service/firebaseConnection';
+
+import { toast } from 'react-toastify';
+
+
 import './style.css';
 
-function FormFloatingBasicExample() {
+function FormFloatingBasicExample({ id }) {
     const [quantidadeProvas, setQuantidadeProvas] = useState(1);
     const [notas, setNotas] = useState([]);
     const [canSubmit, setCanSubmit] = useState('disabled');
     const [formula, setFormula] = useState('');
 
+    useEffect(() => {
+        if (notas.every(nota => nota !== '' && quantidadeProvas > 0 && formula !== '')) {
+            setCanSubmit('');
+        } else {
+            setCanSubmit('disabled')
+        }
+    }, [notas, quantidadeProvas, formula])
+
     const handleNotaChange = (index, value) => {
         const newNotas = [...notas];
         newNotas[index] = value;
         setNotas(newNotas);
+    }
 
-        if (newNotas.every(nota => nota !== '' && quantidadeProvas > 0 && formula !== '')) {
-            setCanSubmit('');
-        } else { }
+    const handleSubmit = async e => {
+        e.preventDefault()
+        try {
+            const docRef = doc(db, "subject", id);
+
+            await updateDoc(docRef, {
+                formula,
+                notas
+            });
+
+
+            toast.success('Notas adicionada com sucesso!');
+        } catch (err) {
+            toast.error('Erro ao adicionar notas. Tente novamente mais tarde.');
+        }
     }
 
     const renderInputs = () => {
@@ -51,9 +80,7 @@ function FormFloatingBasicExample() {
                     </FloatingLabel>
                 </Col>
                 <Col className="d-inline-block mx-auto" sm={12} md={6}>
-                    <FloatingLabel controlId="floatingPassword" label="Formula média">
-                        <Form.Control value={formula} onChange={e => setFormula(e.target.value)} type="password" placeholder="Sua fórmula para média" />
-                    </FloatingLabel>
+                    <MathInput value={formula} onChange={e => setFormula(e.target.value)} />
                 </Col>
             </Row>
 
@@ -62,7 +89,7 @@ function FormFloatingBasicExample() {
             </Row>
 
             <Row className='add-subject-form justify-content-center'>
-                <button style={{ width: '50%' }} className={`mt-5 ${canSubmit}`} type="submit">Submit</button>
+                <button onClick={e => handleSubmit(e)} style={{ width: '50%' }} className={`mt-5 ${canSubmit}`} type="submit">Submit</button>
             </Row>
 
         </>
