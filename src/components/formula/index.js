@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
+import { BlockMath } from 'react-katex';
 import { FloatingLabel, Form, Button } from 'react-bootstrap';
 
 import './style.css'
 
-const MathInput = () => {
-    const [formula, setFormula] = useState('');
-
+const MathInput = ({ setFormula, formula }) => {
     const handleExampleButtonClick = () => {
         setFormula('c = \\pm\\sqrt{a^2 + b^2}');
     }
@@ -15,8 +13,9 @@ const MathInput = () => {
     return (
         <div className="math-input">
             <div className="">
-                <FloatingLabel controlId="floatingPassword" label="Formula média" className="me-2">
+                <FloatingLabel controlId="floatingPassword" label="Formula média" className="me-2 mb-2">
                     <Form.Control
+                        required
                         value={formula}
                         onChange={(e) => setFormula(e.target.value)}
                         type="text"

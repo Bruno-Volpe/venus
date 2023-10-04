@@ -63,6 +63,8 @@ function App() {
                         techerName,
                         media,
                         formula: '',
+                        quantidadeProvas: 0,
+                        notas: [{}],
                         imageUrl,
                         userId: auth.currentUser.uid,
                     });
