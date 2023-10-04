@@ -27,6 +27,14 @@ function FormFloatingBasicExample() {
     const [quantidadeProvas, setQuantidadeProvas] = useState(1);
     const [notas, setNotas] = useState([]);
     const [formula, setFormula] = useState('');
+    const [datas, setDatas] = useState([]);
+
+    const handleDateChange = (index, value) => {
+        const newDatas = [...datas];
+        newDatas[index] = value;
+        setDatas(newDatas);
+    }
+
 
     const handleNotaChange = (index, value) => {
         const newNotas = [...notas];
@@ -47,10 +55,10 @@ function FormFloatingBasicExample() {
         }
 
         // Check if all notas are filled
-        if (notas.some(nota => nota === '')) {
-            toast.error('Please fill in all nota fields.');
-            return false;
-        }
+        // if (notas.some(nota => nota === '')) {
+        //     toast.error('Please fill in all nota fields.');
+        //     return false;
+        // }
 
         return true;
     }
@@ -61,14 +69,23 @@ function FormFloatingBasicExample() {
         try {
             const docRef = doc(db, "subject", id);
 
+            const notasComDatas = [{}]
+            for (let i = 0; i < quantidadeProvas; i++) {
+                notasComDatas.push({
+                    nota: notas[i] || 0,
+                    dueDate: datas[i] || '',
+                })
+            }
+
+            console.log(notasComDatas)
+
             await updateDoc(docRef, {
                 formula,
-                notas,
+                notas: notasComDatas,
                 quantidadeProvas
             });
 
-
-            toast.success('Notas adicionada com sucesso!');
+            toast.success('Notas adicionadas com sucesso!');
             navigate(`/cardDetails/${id}`)
         } catch (err) {
             toast.error('Erro ao adicionar notas. Tente novamente mais tarde.');
@@ -82,11 +99,17 @@ function FormFloatingBasicExample() {
                 <Col key={i} sm={6} md={4} lg={3} className="d-inline-block mb-3">
                     <FloatingLabel controlId={`floatingInput${i}`} label={`P ${i + 1}`}>
                         <Form.Control
-                            required
                             type="number"
                             placeholder={`Nota da prova ${i + 1}`}
                             value={notas[i] || ''}
                             onChange={(e) => handleNotaChange(i, e.target.value)}
+                        />
+                    </FloatingLabel>
+                    <FloatingLabel controlId={`floatingDate${i}`} label={`Data da prova ${i + 1}`}>
+                        <Form.Control
+                            type="date"
+                            value={datas[i] || ''}
+                            onChange={(e) => handleDateChange(i, e.target.value)}
                         />
                     </FloatingLabel>
                 </Col>
@@ -94,6 +117,7 @@ function FormFloatingBasicExample() {
         }
         return inputs;
     }
+
 
     return (
         <>

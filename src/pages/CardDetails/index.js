@@ -24,6 +24,19 @@ function App() {
     const [subject, setSubject] = useState({
         formula: '' // Inicializa com uma string vazia
     })
+
+    const handleDate = () => {
+        const dataOriginal = "2023-10-11";
+        const dataObjeto = new Date(dataOriginal);
+        const dia = dataObjeto.getDate();
+        const mes = dataObjeto.getMonth() + 1; // Lembre-se que os meses em JavaScript são de 0 a 11
+        const ano = dataObjeto.getFullYear();
+
+        const dataFormatada = `${dia}/${mes}/${ano}`;
+
+        return dataFormatada;
+    }
+    navigate(`/storeGrades/${id}`)
     useEffect(() => {
         const loadSubject = async () => {
             try {
@@ -89,6 +102,7 @@ function App() {
                             <Col key={index} lg={2} md={4} sm={6} xs={6} className="text-center mt-3">
                                 <div className="mb-3">
                                     <p>P{index + 1}: {nota.toFixed(1)}</p>
+                                    <p>Data: {handleDate()}</p>
                                 </div>
                             </Col>
                         ))}
