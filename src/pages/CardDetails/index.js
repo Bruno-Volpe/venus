@@ -72,7 +72,7 @@ function App() {
         <>
             <Nav />
 
-            <Container className='mt-5'>
+            <Container className='mt-5 responsive'>
                 <>
                     <ModalRemove id={id} setShow={setShowRemoveModal} show={showRemoveModal} />
                     <Row className="justify-content-center m-1 forms-card-detail">
@@ -118,16 +118,16 @@ function App() {
                     </Row>
 
                     <Row className="justify-content-center m-1 forms-card-detail">
-                        <Col className='d-flex justify-content-between' md={10}>
-                            <Button onClick={() => navigate(`/storeNewSubject/${id}`)} variant="light" className="bg-info">
+                        <Col className='d-flex flex-column flex-md-row justify-content-between align-items-center' md={10}>
+                            <Button onClick={() => navigate(`/storeNewSubject/${id}`)} variant="light" className="bg-info mb-1 mb-md-0">
                                 <FontAwesomeIcon icon={faCog} className="" />
                                 Configurações da Matéria
                             </Button>
-                            <Button onClick={() => navigate(`/storeGrades/${id}`)} variant="light" className="bg-success">
+                            <Button onClick={() => navigate(`/storeGrades/${id}`)} variant="light" className="bg-success mb-1 mb-md-0">
                                 <FontAwesomeIcon icon={faBook} className="" />
                                 Configurações das Notas
                             </Button>
-                            <Button onClick={(e) => handleRemove(e)} variant="light" className="bg-danger">
+                            <Button onClick={(e) => handleRemove(e)} variant="light" className="bg-danger mb-1 mb-md-0">
                                 <FontAwesomeIcon icon={faTrash} className="" />
                                 Remover Disciplina
                             </Button>
