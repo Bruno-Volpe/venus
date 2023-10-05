@@ -1,7 +1,8 @@
 Fazer verificao forms na parte de nota
-Fazer loading para criar materia e tronar img opcional
 
 Terminar DashBoard
+Fazer partes de update
 
 POS BETA:
     Fazer unsplash
+    Tornar img opcional

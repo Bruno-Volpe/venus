@@ -69,15 +69,13 @@ function FormFloatingBasicExample() {
         try {
             const docRef = doc(db, "subject", id);
 
-            const notasComDatas = [{}]
+            const notasComDatas = []
             for (let i = 0; i < quantidadeProvas; i++) {
                 notasComDatas.push({
-                    nota: notas[i] || 0,
+                    nota: Number(notas[i]) || 0,
                     dueDate: datas[i] || '',
                 })
             }
-
-            console.log(notasComDatas)
 
             await updateDoc(docRef, {
                 formula,
