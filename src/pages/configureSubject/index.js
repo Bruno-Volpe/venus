@@ -96,7 +96,7 @@ function FormFloatingBasicExample() {
         const inputs = [];
         for (let i = 0; i < quantidadeProvas; i++) {
             inputs.push(
-                <Col key={i} sm={6} md={4} lg={3} className="d-inline-block mb-3">
+                <Col key={i} sm={6} md={4} lg={3} className="d-inline-block mb-3 mx-auto text-center align-items-center">
                     <FloatingLabel controlId={`floatingInput${i}`} label={`P ${i + 1}`}>
                         <Form.Control
                             type="number"
@@ -129,6 +129,9 @@ function FormFloatingBasicExample() {
                             <Form.Control required value={quantidadeProvas} onChange={e => setQuantidadeProvas(e.target.value)} type="number" placeholder="Sua quantidade de prova" />
                         </FloatingLabel>
                     </Col>
+                </Row>
+
+                <Row className="mx-auto mb-5">
                     <Col className="d-inline-block mx-auto" sm={12} md={6}>
                         <MathInput formula={formula} setFormula={setFormula} />
                     </Col>

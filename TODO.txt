@@ -1,6 +1,5 @@
 Fazer verificao forms na parte de nota
 Fazer loading para criar materia e tronar img opcional
-Fazer menu para selecao de fomrula
 
 Terminar DashBoard
 

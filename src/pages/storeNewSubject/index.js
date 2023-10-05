@@ -17,8 +17,17 @@ function App() {
     const [subjectName, setSubjectName] = useState('');
     const [techerName, setTecherName] = useState('');
     const [techerEmail, setTecherEmail] = useState('');
-    const [media, setmedia] = useState('');
+    const [media, setmedia] = useState(0);
     const [selectedFile, setSelectedFile] = useState(null);
+
+    const [loading, setLoading] = useState(false);
+
+    const handleFormat = () => {
+        setSubjectName('')
+        setTecherEmail('')
+        setTecherName('')
+        setmedia(0)
+    }
 
 
     //TODO: criar notas 
@@ -46,6 +55,9 @@ function App() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (document.querySelector('button').disabled) return
+        setLoading(true);
+
         const errorMessage = formValidate();
 
         if (errorMessage === '') {
@@ -55,6 +67,7 @@ function App() {
 
                     const storageRef = ref(storage, `images/${resizedFile.name}`);
                     await uploadBytes(storageRef, resizedFile);
+
                     const imageUrl = await getDownloadURL(storageRef);
 
                     await addDoc(collection(db, "subject"), {
@@ -68,8 +81,9 @@ function App() {
                         imageUrl,
                         userId: auth.currentUser.uid,
                     });
-
+                    handleFormat()
                     toast.success('Matéria adicionada com sucesso!');
+                    setLoading(false);
                 } else {
                     toast.warning('Selecione uma imagem');
                 }
@@ -121,13 +135,13 @@ function App() {
                             </Form.Group>
 
 
-                            <button type="submit" className="w-100 mt-5">
+                            <button disabled={loading} type="submit" className="w-100 mt-1">
                                 Submit
                             </button>
                         </Form>
                     </Col>
                 </Row>
-            </Container>
+            </Container >
         </>
     );
 }

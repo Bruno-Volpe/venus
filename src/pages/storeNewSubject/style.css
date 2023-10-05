@@ -36,3 +36,11 @@
         border-color:#EB5E28;
         border: 1px solid;
     }  
+
+    .add-subject-form button:disabled {
+      background-color: #ccc !important; /* Cor de fundo quando desativado */
+      color: #888; /* Cor do texto quando desativado */
+      cursor: not-allowed; /* Cursor do mouse quando passa por cima */
+      border: 1px solid #ccc; /* Borda quando desativado */
+    }
+    
