@@ -59,7 +59,7 @@ function FormFloatingBasicExample() {
             return false
         }
 
-        if (cardDetail.checkVariableCount(quantidadeProvas, formula) === false) {
+        if (cardDetail.checkVariableCount() === false) {
             toast.error('Quantidade de prova na formula invalida')
             return false
         }
@@ -82,7 +82,7 @@ function FormFloatingBasicExample() {
             const notasComDatas = []
             for (let i = 0; i < quantidadeProvas; i++) {
                 notasComDatas.push({
-                    nota: Number(notas[i]) || 0,
+                    nota: Number(notas[i]) || `n${i + 1}`,
                     dueDate: datas[i] || '',
                 })
             }

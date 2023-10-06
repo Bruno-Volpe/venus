@@ -23,21 +23,24 @@ function App() {
     const { id } = useParams()
     const navigate = useNavigate()
 
-    const [passou, setPassou] = useState(true)
     const [notas, setNotas] = useState([])
     const [subject, setSubject] = useState({})
     const [showRemoveModal, setShowRemoveModal] = useState(false);
 
-    const cardDetail = new CardDetail(subject.formula, notas, subject.quantidadeProvas);
+    const cardDetail = new CardDetail(subject.formula, notas, subject.quantidadeProvas, subject.media);
+    console.log(cardDetail.calculateMissingVariables())
+
+    const passou = cardDetail.getStatusMedia();
 
     const handleRemove = (e) => {
         setShowRemoveModal(true);
     }
 
-    const handleDate = () => {
-        const dataOriginal = "2023-10-11";
+    const handleDate = (date) => {
+        if (!date) return ('dd/mm/aaaa');
+        const dataOriginal = date;
         const dataObjeto = new Date(dataOriginal);
-        const dia = dataObjeto.getDate();
+        const dia = dataObjeto.getDate() + 1;
         const mes = dataObjeto.getMonth() + 1; // Lembre-se que os meses em JavaScript são de 0 a 11
         const ano = dataObjeto.getFullYear();
 
@@ -94,7 +97,7 @@ function App() {
 
                         <Col md={4} className="text-center mt-3">
                             <div className="mb-3">
-                                <p>Media: {cardDetail.resolveFormula(subject.formula, notas)}</p>
+                                <p>Media: {cardDetail.resolveFormula()}</p>
                             </div>
                         </Col>
 
@@ -114,8 +117,8 @@ function App() {
                         {notas.map((el, index) => (
                             <Col key={index} lg={2} md={4} sm={6} xs={6} className="text-center mt-3">
                                 <div className="mb-3">
-                                    <p>P{index + 1}: {el.nota && el.nota.toFixed(1)}</p>
-                                    <p>Data: {handleDate()}</p>
+                                    <p>P{index + 1}: {typeof (el.nota) === 'number' && el.nota.toFixed(1)}</p>
+                                    <p>Data: {handleDate(el.dueDate)}</p>
                                 </div>
                             </Col>
                         ))}
