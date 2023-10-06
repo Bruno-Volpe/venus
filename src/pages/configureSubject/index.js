@@ -3,6 +3,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 
 import MathInput from '../../components/formula';
@@ -16,18 +17,22 @@ import { toast } from 'react-toastify';
 
 import Nav from '../../components/nav'
 
+import CardDetail from '../../util/cardDetail';
+
 
 import './style.css';
-import { Container } from 'react-bootstrap';
 
 function FormFloatingBasicExample() {
     const { id } = useParams()
     const navigate = useNavigate()
 
+
     const [quantidadeProvas, setQuantidadeProvas] = useState(1);
     const [notas, setNotas] = useState([]);
     const [formula, setFormula] = useState('');
     const [datas, setDatas] = useState([]);
+
+    const cardDetail = new CardDetail(formula, notas, quantidadeProvas);
 
     const handleDateChange = (index, value) => {
         const newDatas = [...datas];
@@ -51,6 +56,11 @@ function FormFloatingBasicExample() {
 
         if (quantidadeProvas <= 0) {
             toast.error('Quantidade de prova invalida')
+            return false
+        }
+
+        if (cardDetail.checkVariableCount(quantidadeProvas, formula) === false) {
+            toast.error('Quantidade de prova na formula invalida')
             return false
         }
 

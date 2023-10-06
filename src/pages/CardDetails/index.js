@@ -11,6 +11,8 @@ import { faCheckCircle, faTimesCircle, faCog, faBook, faTrash, } from '@fortawes
 
 import { BlockMath } from 'react-katex';
 
+import CardDetail from '../../util/cardDetail';
+
 import Nav from '../../components/nav';
 import ModalRemove from '../../components/removeModal';
 
@@ -25,6 +27,8 @@ function App() {
     const [notas, setNotas] = useState([])
     const [subject, setSubject] = useState({})
     const [showRemoveModal, setShowRemoveModal] = useState(false);
+
+    const cardDetail = new CardDetail(subject.formula, notas, subject.quantidadeProvas);
 
     const handleRemove = (e) => {
         setShowRemoveModal(true);
@@ -90,7 +94,7 @@ function App() {
 
                         <Col md={4} className="text-center mt-3">
                             <div className="mb-3">
-                                <p>Media: {subject.media}</p>
+                                <p>Media: {cardDetail.resolveFormula(subject.formula, notas)}</p>
                             </div>
                         </Col>
 
