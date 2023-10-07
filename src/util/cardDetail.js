@@ -31,6 +31,19 @@ class CardDetail {
         }
     }
 
+    checkVariableCount() {
+        const regex = /n\d+/g;
+        const matches = this.latexFormula.match(regex);
+
+        if (matches) {
+            const uniqueMatches = [...new Set(matches)]; // Remove duplicatas
+            console.log({ x: this.numberOfGrades, uniqueMatchesLength: uniqueMatches.length })
+            return uniqueMatches.length === Number(this.numberOfGrades);
+        }
+
+        return false;
+    }
+
     getStatusMedia() {
         const mediaAluno = this.resolveFormula()
         if (mediaAluno >= this.media) {
