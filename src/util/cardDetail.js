@@ -1,4 +1,4 @@
-import { evaluate } from 'mathjs';
+import { evaluate, lusolve } from 'mathjs';
 
 class CardDetail {
     constructor(
@@ -53,26 +53,22 @@ class CardDetail {
     }
 
     calculateMissingVariables() {
-
-        const newValues = this.values.map((value, i) => {
-            return typeof value.nota === 'number' ? value.nota : `n${i + 1}`;
+        const newValues = [];
+        this.values.map((value, i) => {
+            newValues.push(typeof value.nota === 'number' ? value.nota : `n${i + 1}`);
         });
 
-        const equation = `(${newValues.join(' + ')}) / ${newValues.length} = ${this.media}`;
-
         try {
-            const solution = evaluate(equation);
+            let formula = this.latexFormula
+                .replace(/n(\d+)/g, (_, index) => newValues[parseInt(index) - 1])
+                .replace(/\\frac{(\d+)}{(\d+)}/g, '$1 / $2')
+                .replace(/\\sqrt{([^}]*)}/g, 'sqrt($1)');
 
-            const updatedValues = this.values.map((value, i) => {
-                if (typeof value.nota !== 'number') {
-                    return { ...value, nota: solution[i] };
-                }
-                return value;
-            });
-
-            return ({ values: updatedValues });
+            formula = `${this.media} = ${formula.replace(/n(\d+)/g, 'n')}`;
+            console.log(formula)
+            const solvedFormula = lusolve(formula, 'n');
         } catch (error) {
-            console.error("Erro ao resolver a equação:", error);
+            return 'Erro na expressão';
         }
     }
 }
