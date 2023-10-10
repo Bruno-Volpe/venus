@@ -41,7 +41,7 @@ function App() {
         const dataOriginal = date;
         const dataObjeto = new Date(dataOriginal);
         const dia = dataObjeto.getDate() + 1;
-        const mes = dataObjeto.getMonth() + 1; // Lembre-se que os meses em JavaScript são de 0 a 11
+        const mes = dataObjeto.getMonth() + 1;
         const ano = dataObjeto.getFullYear();
 
         const dataFormatada = `${dia}/${mes}/${ano}`;
@@ -68,7 +68,7 @@ function App() {
                     toast.error('Matéria não encontrada');
                 }
             } catch (error) {
-                console.error('Erro ao buscar os dados:', error);
+                alert.error('Erro ao buscar os dados:');
             }
         }
 

@@ -10,7 +10,7 @@ import MathInput from '../../components/formula';
 
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import db, { auth, storage } from '../../service/firebaseConnection';
 
 import { toast } from 'react-toastify';
@@ -26,11 +26,30 @@ function FormFloatingBasicExample() {
     const { id } = useParams()
     const navigate = useNavigate()
 
-
     const [quantidadeProvas, setQuantidadeProvas] = useState(1);
     const [notas, setNotas] = useState([]);
     const [formula, setFormula] = useState('');
     const [datas, setDatas] = useState([]);
+
+    useEffect(() => {
+        const loadSubject = async () => {
+            try {
+                const docRef = doc(db, 'subject', id);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    await setNotas(docSnap.data().notas);
+                    setFormula(docSnap.data().formula);
+                    setQuantidadeProvas(docSnap.data().quantidadeProvas);
+                    setDatas(docSnap.data().notas.map(nota => nota.dueDate))
+                }
+            } catch (error) {
+                alert.error('Erro ao buscar os dados');
+            }
+        }
+
+        loadSubject();
+    }, [id])
 
     const cardDetail = new CardDetail(formula, notas, quantidadeProvas);
 
