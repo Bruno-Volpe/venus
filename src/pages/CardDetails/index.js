@@ -26,9 +26,11 @@ function App() {
     const [notas, setNotas] = useState([])
     const [subject, setSubject] = useState({})
     const [showRemoveModal, setShowRemoveModal] = useState(false);
+    const [missingVariable, setMissingVariable] = useState('')
 
     const cardDetail = new CardDetail(subject.formula, notas, subject.quantidadeProvas, subject.media);
-    console.log(cardDetail.calculateMissingVariables())
+    cardDetail.calculateMissingVariables().then((result) => setMissingVariable(result))
+    console.log(missingVariable)
 
     const passou = cardDetail.getStatusMedia();
 
@@ -117,11 +119,21 @@ function App() {
                         {notas.map((el, index) => (
                             <Col key={index} lg={2} md={4} sm={6} xs={6} className="text-center mt-3">
                                 <div className="mb-3">
-                                    <p>P{index + 1}: {typeof (el.nota) === 'number' && el.nota.toFixed(1)}</p>
+                                    {/n\d/.test(el.nota) ?
+                                        <p style={{ color: 'red' }} >P{index + 1}: {typeof (missingVariable) === 'number' && missingVariable.toFixed(1)}</p>
+                                        :
+                                        <p>P{index + 1}: {typeof (el.nota) === 'number' && el.nota.toFixed(1)}</p>
+                                    }
                                     <p>Data: {handleDate(el.dueDate)}</p>
                                 </div>
                             </Col>
                         ))}
+                    </Row>
+                    <Row className="justify-content-center">
+                        <hr style={{ width: '40%' }} />
+                    </Row>
+                    <Row className="justify-content-center">
+                        <small className='text-center mt-2 mb-5' >As notas em vermelho são aquelas necessárias para você atingir a média</small>
                     </Row>
 
                     <Row className="justify-content-center m-1 forms-card-detail">

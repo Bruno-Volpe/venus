@@ -1,5 +1,7 @@
 import { evaluate, simplify } from 'mathjs';
 
+import axios from 'axios'
+
 class CardDetail {
     constructor(
         latexFormula = '',
@@ -59,37 +61,30 @@ class CardDetail {
         });
 
         try {
-            let soluction
             let formula = this.latexFormula
                 .replace(/n(\d+)/g, (_, index) => newValues[parseInt(index) - 1])
                 .replace(/\\frac{(\d+)}{(\d+)}/g, '$1 / $2')
                 .replace(/\\sqrt{([^}]*)}/g, 'sqrt($1)');
 
             formula = simplify(`${formula.replace(/n(\d+)/g, 'n')}`).toString();
-            formula = formula.replace(/(\d*)n/g, (match, p1) => `${p1 ? p1 : ''}n`);
-            resolverEquacao(formula, this.media)
-                .then(solucoes => soluction = solucoes)
-                .catch(error => console.error(error));
 
-            console.log(soluction)
+            return resolverEquacao(formula, this.media).then((result) => {
+                return (result.filter(elemento => elemento > 0)[0])
+            })
         } catch (error) {
             return 'Erro na expressão';
         }
     }
 }
 
-function resolverEquacao(expressao, valor) {
-    const formData = new FormData();
-    formData.append('expressao', expressao);
-    formData.append('valor', valor);
-
-    return fetch('/resolver', {
-        method: 'POST',
-        body: formData,
+async function resolverEquacao(expressao, valor) {
+    const result = await axios.post('http://localhost:5000/resolver', {
+        expressao,
+        valor
     })
-        .then(response => response.json())
-        .then(data => data.solucoes)
-        .catch(error => console.error('Erro:', error));
+
+    return result.data.solucoes
 }
+
 
 export default CardDetail;
