@@ -99,7 +99,7 @@ function App() {
 
                         <Col md={4} className="text-center mt-3">
                             <div className="mb-3">
-                                <p>Media: {cardDetail.resolveFormula()}</p>
+                                <p>Sua Media: {cardDetail.resolveFormula()}</p>
                             </div>
                         </Col>
 

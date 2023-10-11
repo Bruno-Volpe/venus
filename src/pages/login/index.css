@@ -38,7 +38,7 @@ img {
   display: inline-block;
   font-size: 16px;
   border-radius: 4px;
-  transition-duration: 0.4s;
+  transition: 0.4s;
   border: 1px transparent;
 }
 
