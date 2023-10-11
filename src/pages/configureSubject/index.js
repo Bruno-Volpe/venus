@@ -38,13 +38,13 @@ function FormFloatingBasicExample() {
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
-                    await setNotas(docSnap.data().notas);
+                    setNotas(docSnap.data().notas.map(el => el.nota));
                     setFormula(docSnap.data().formula);
                     setQuantidadeProvas(docSnap.data().quantidadeProvas);
-                    setDatas(docSnap.data().notas.map(nota => nota.dueDate))
+                    setDatas(docSnap.data().notas.map(el => el.dueDate))
                 }
             } catch (error) {
-                alert.error('Erro ao buscar os dados');
+                toast.error('Erro ao buscar os dados');
             }
         }
 
