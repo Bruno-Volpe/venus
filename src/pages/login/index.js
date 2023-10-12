@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, provider } from '../../service/firebaseConnection';
-import { onAuthStateChanged, signInWithRedirect, getRedirectResult } from "firebase/auth";
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { onAuthStateChanged, signInWithRedirect } from "firebase/auth";
+import { Container, Row, Col } from 'react-bootstrap';
 
 import logo from '../../assets/pngtree-venus-planet-isolated-on-white-background-png-image_4682545.png'
 

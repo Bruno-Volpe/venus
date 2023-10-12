@@ -11,7 +11,7 @@ export default function Private({ children }) {
 
     useEffect(() => {
         async function checkLogin() {
-            const unsub = onAuthStateChanged(auth, (user) => {
+            onAuthStateChanged(auth, (user) => {
                 //se tem user logado
                 if (user) {
                     const userData = {

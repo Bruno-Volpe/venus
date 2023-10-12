@@ -17,6 +17,7 @@ class CardDetail {
 
     resolveFormula() {
         const newValues = []
+        // eslint-disable-next-line array-callback-return
         this.values.map(value => {
             newValues.push(typeof (value.nota) === 'number' ? value.nota : 0)
         })
@@ -56,6 +57,7 @@ class CardDetail {
 
     calculateMissingVariables() {
         const newValues = [];
+        // eslint-disable-next-line array-callback-return
         this.values.map((value, i) => {
             newValues.push(typeof value.nota === 'number' ? value.nota : `n${i + 1}`);
         });

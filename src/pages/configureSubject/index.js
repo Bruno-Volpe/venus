@@ -4,14 +4,13 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Container } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
 
 import MathInput from '../../components/formula';
 
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { doc, updateDoc, getDoc } from "firebase/firestore";
-import db, { auth, storage } from '../../service/firebaseConnection';
+import db from '../../service/firebaseConnection';
 
 import { toast } from 'react-toastify';
 

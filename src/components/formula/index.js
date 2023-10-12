@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'katex/dist/katex.min.css';
 import { BlockMath } from 'react-katex';
-import { FloatingLabel, Form, Button, Row, Col } from 'react-bootstrap';
+import { FloatingLabel, Form, Row, Col } from 'react-bootstrap';
 
 import SymbolSelector from './SymbolSelector';
 
 import './style.css'
 
 const MathInput = ({ setFormula, formula }) => {
-    const handleExampleButtonClick = () => {
-        setFormula('c = \\pm\\sqrt{a^2 + b^2}');
-    }
-
     const handleSymbolSelect = (symbol) => {
         setFormula(formula + symbol);
     }

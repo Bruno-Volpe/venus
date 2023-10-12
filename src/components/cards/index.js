@@ -9,9 +9,7 @@ import db, { auth } from '../../service/firebaseConnection';
 import './style.css';
 
 function Cards() {
-    const [modalShow, setModalShow] = useState(false);
     const [subjects, setSubjects] = useState([]);
-    const [actualSubject, setActualSubject] = useState();
 
     const navigate = useNavigate();
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -16,8 +16,6 @@ import logo from '../../assets/pngtree-venus-planet-isolated-on-white-background
 import './style.css';
 
 function App() {
-    const [modalShow, setModalShow] = useState(false);
-
     const user = auth.currentUser;
     const displayName = user ? user.displayName : '';
 
