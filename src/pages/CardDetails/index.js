@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Container, Row, Col, Button } from 'react-bootstrap';
@@ -28,12 +28,6 @@ function App() {
     const [showRemoveModal, setShowRemoveModal] = useState(false);
     const [missingVariable, setMissingVariable] = useState('')
 
-    const cardDetail = new CardDetail(subject.formula, notas, subject.quantidadeProvas, subject.media);
-    cardDetail.calculateMissingVariables().then((result) => setMissingVariable(result))
-    console.log(missingVariable)
-
-    const passou = cardDetail.getStatusMedia();
-
     const handleRemove = (e) => {
         setShowRemoveModal(true);
     }
@@ -51,15 +45,15 @@ function App() {
         return dataFormatada;
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const loadSubject = async () => {
             try {
                 const docRef = doc(db, 'subject', id);
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
-                    await setSubject(docSnap.data());
-                    await setNotas(docSnap.data().notas);
+                    setSubject(docSnap.data());
+                    setNotas(docSnap.data().notas);
 
                     // Check subject.formula inside the function
                     if (docSnap.data().formula === '' || docSnap.data().formula === undefined) {
@@ -76,6 +70,15 @@ function App() {
 
         loadSubject();
     }, [id, subject.formula, navigate]);
+
+    async function loadMissingVariables() {
+        if (cardDetail.checkVariableCount()) setMissingVariable(await cardDetail.calculateMissingVariables())
+    }
+
+    const cardDetail = new CardDetail(subject.formula, notas, subject.quantidadeProvas, subject.media)
+    loadMissingVariables()
+
+    const passou = cardDetail.getStatusMedia();
 
     return (
         <>
@@ -120,7 +123,7 @@ function App() {
                             <Col key={index} lg={2} md={4} sm={6} xs={6} className="text-center mt-3">
                                 <div className="mb-3">
                                     {/n\d/.test(el.nota) ?
-                                        <p style={{ color: 'red' }} >P{index + 1}: {typeof (missingVariable) === 'number' && missingVariable.toFixed(1)}</p>
+                                        <p style={{ color: passou ? 'green' : 'red' }}>P{index + 1}: {typeof (missingVariable) === 'number' && missingVariable.toFixed(1)}</p>
                                         :
                                         <p>P{index + 1}: {typeof (el.nota) === 'number' && el.nota.toFixed(1)}</p>
                                     }
@@ -153,7 +156,7 @@ function App() {
                         </Col>
                     </Row>
                 </>
-            </Container>
+            </Container >
         </>
     );
 }

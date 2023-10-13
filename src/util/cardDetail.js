@@ -40,7 +40,7 @@ class CardDetail {
 
         if (matches) {
             const uniqueMatches = [...new Set(matches)]; // Remove duplicatas
-            console.log({ x: this.numberOfGrades, uniqueMatchesLength: uniqueMatches.length })
+
             return uniqueMatches.length === Number(this.numberOfGrades);
         }
 
