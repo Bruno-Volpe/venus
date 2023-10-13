@@ -157,8 +157,8 @@ function FormFloatingBasicExample() {
                     </Col>
                 </Row>
 
-                <Row className="mx-auto mb-5">
-                    <Col className="d-inline-block mx-auto" sm={12} md={6}>
+                <Row className="mx-auto">
+                    <Col className="d-inline-block mb-5 mx-auto" sm={12} md={6}>
                         <MathInput formula={formula} setFormula={setFormula} />
                     </Col>
                 </Row>
