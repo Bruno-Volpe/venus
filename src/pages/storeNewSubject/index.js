@@ -55,7 +55,7 @@ function App() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (document.querySelector('button').disabled) return
+        if (loading) return
         setLoading(true);
 
         const errorMessage = formValidate();
@@ -83,12 +83,13 @@ function App() {
                     });
                     handleFormat()
                     toast.success('Matéria adicionada com sucesso!');
-                    setLoading(false);
                 } else {
                     toast.warning('Selecione uma imagem');
                 }
             } catch (err) {
                 toast.error('Erro ao adicionar matéria. Tente novamente mais tarde.');
+            } finally {
+                setLoading(false);
             }
         } else {
             toast.warning(errorMessage);
