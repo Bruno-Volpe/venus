@@ -27,7 +27,7 @@ export default function Private({ children }) {
                 } else {
                     //nao possui user logado
                     setLoading(false);
-                    setSigned(false);
+                    setSigned(true);
                 }
             })
         }
