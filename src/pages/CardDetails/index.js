@@ -18,6 +18,7 @@ import ModalRemove from '../../components/removeModal';
 
 import './style.css';
 import { toast } from 'react-toastify';
+import { cos } from 'mathjs';
 
 function App() {
     const { id } = useParams()
@@ -27,6 +28,8 @@ function App() {
     const [subject, setSubject] = useState({})
     const [showRemoveModal, setShowRemoveModal] = useState(false);
     const [missingVariable, setMissingVariable] = useState('')
+    const [media, setMedia] = useState(0)
+    const [passou, setPassou] = useState(false)
 
     const handleRemove = (e) => {
         setShowRemoveModal(true);
@@ -63,6 +66,11 @@ function App() {
                     navigate('/')
                     toast.error('Matéria não encontrada');
                 }
+
+                const cardDetail = new CardDetail(docSnap.data().formula, docSnap.data().notas, docSnap.data().quantidadeProvas, docSnap.data().media)
+                if (cardDetail.checkVariableCount()) setMissingVariable(await cardDetail.calculateMissingVariables())
+                setMedia(await cardDetail.resolveFormula())
+                setPassou(await cardDetail.getStatusMedia())
             } catch (error) {
                 alert.error('Erro ao buscar os dados:');
             }
@@ -70,15 +78,6 @@ function App() {
 
         loadSubject();
     }, [id, subject.formula, navigate]);
-
-    async function loadMissingVariables() {
-        if (cardDetail.checkVariableCount()) setMissingVariable(await cardDetail.calculateMissingVariables())
-    }
-
-    const cardDetail = new CardDetail(subject.formula, notas, subject.quantidadeProvas, subject.media)
-    loadMissingVariables()
-
-    const passou = cardDetail.getStatusMedia();
 
     return (
         <>
@@ -102,7 +101,7 @@ function App() {
 
                         <Col md={4} className="text-center mt-3">
                             <div className="mb-3">
-                                <p>Sua Media: {cardDetail.resolveFormula()}</p>
+                                <p>Sua Media: {media}</p>
                             </div>
                         </Col>
 

@@ -1,6 +1,5 @@
-import { evaluate, simplify } from 'mathjs';
-
 import axios from 'axios'
+import { simplify } from 'mathjs';
 
 class CardDetail {
     constructor(
@@ -27,7 +26,7 @@ class CardDetail {
                 .replace(/n(\d+)/g, (_, index) => newValues[parseInt(index) - 1])
                 .replace(/\\frac{(\d+)}{(\d+)}/g, '$1 / $2')
                 .replace(/\\sqrt{([^}]*)}/g, 'sqrt($1)');
-            const evaluatedResult = evaluate(formula);
+            const evaluatedResult = evaluate(formula).then(result => result);
             return evaluatedResult;
         } catch (error) {
             return 'Erro na expressão';
@@ -47,8 +46,9 @@ class CardDetail {
         return false;
     }
 
-    getStatusMedia() {
-        const mediaAluno = this.resolveFormula()
+    async getStatusMedia() {
+        const mediaAluno = await this.resolveFormula()
+
         if (mediaAluno >= this.media) {
             return true
         }
@@ -69,7 +69,6 @@ class CardDetail {
                 .replace(/\\sqrt{([^}]*)}/g, 'sqrt($1)');
 
             formula = simplify(`${formula.replace(/n(\d+)/g, 'n')}`).toString();
-
             return resolverEquacao(formula, this.media).then((result) => {
                 return (result.filter(elemento => elemento > 0)[0])
             })
@@ -86,6 +85,14 @@ async function resolverEquacao(expressao, valor) {
     })
 
     return result.data.solucoes
+}
+
+async function evaluate(expressao) {
+    const result = await axios.post('http://localhost:5000/evaluate', {
+        expressao
+    })
+
+    return result.data
 }
 
 
