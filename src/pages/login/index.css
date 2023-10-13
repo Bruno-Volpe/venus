@@ -3,6 +3,10 @@
   display: flex;
 }
 
+.row {
+  margin-left: 0 !important; /* Override default Bootstrap margin-left, para deixar centrlizado (VEM DO MDB essa bct) */
+}
+
 .row-login {
   width: 100%;
   height: auto;
