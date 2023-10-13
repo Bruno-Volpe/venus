@@ -7,16 +7,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import logo from '../../assets/pngtree-venus-planet-isolated-on-white-background-png-image_4682545.png'
 
 import './index.css';
-
-function verificaPopupsBloqueados() {
-    if (window.innerWidth > 0) {
-        if (document.body && typeof document.body.style.webkitUserSelect !== "undefined") {
-            if (typeof window.orientation === "undefined") {
-                alert("Os pop-ups estão bloqueados. Por favor, desbloqueie para continuar.");
-            }
-        }
-    }
-}
+import { toast } from 'react-toastify';
 
 function App() {
     const navigate = useNavigate();
@@ -33,13 +24,12 @@ function App() {
     }, [navigate])
 
     const handleLogin = (e) => {
-        verificaPopupsBloqueados()
         signInWithPopup(auth, provider)
             .then((result) => {
                 navigate('/', { replace: true })
             })
             .catch((error) => {
-                console.error("Error signing in:", error);
+                toast.error("Erro ao logar, tente novamente mais tarde!");
                 navigate('/')
             });
     }
