@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, provider } from '../../service/firebaseConnection';
-import { onAuthStateChanged, signInWithRedirect } from "firebase/auth";
+import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import { Container, Row, Col } from 'react-bootstrap';
 
 import logo from '../../assets/pngtree-venus-planet-isolated-on-white-background-png-image_4682545.png'
 
 import './index.css';
+
+function verificaPopupsBloqueados() {
+    if (window.innerWidth > 0) {
+        if (document.body && typeof document.body.style.webkitUserSelect !== "undefined") {
+            if (typeof window.orientation === "undefined") {
+                alert("Os pop-ups estão bloqueados. Por favor, desbloqueie para continuar.");
+            }
+        }
+    }
+}
 
 function App() {
     const navigate = useNavigate();
@@ -23,7 +33,8 @@ function App() {
     }, [navigate])
 
     const handleLogin = (e) => {
-        signInWithRedirect(auth, provider)
+        verificaPopupsBloqueados()
+        signInWithPopup(auth, provider)
             .then((result) => {
                 navigate('/', { replace: true })
             })
