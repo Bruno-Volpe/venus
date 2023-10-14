@@ -6,7 +6,7 @@ import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-const firebaseConfig = {
+const firebaseConfig: any = {
     apiKey: "AIzaSyCdcjsr3Lr_ZixgFGX18KGxyndwC5leV_g",
     authDomain: "venus-409b9.firebaseapp.com",
     projectId: "venus-409b9",
