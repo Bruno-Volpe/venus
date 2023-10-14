@@ -67,7 +67,6 @@ function FormFloatingBasicExample() {
 
     const formValidate = () => {
         // Check if the formula is not empty
-        setFormula(formula.replace(/,/g, '.'));
         if (formula.trim() === '') {
             toast.error('Please enter a formula.');
             return false;
@@ -107,7 +106,7 @@ function FormFloatingBasicExample() {
             }
 
             await updateDoc(docRef, {
-                formula,
+                formula: formula.replace(/,/g, '.') || '',
                 notas: notasComDatas,
                 quantidadeProvas
             });
