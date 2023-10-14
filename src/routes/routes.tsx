@@ -1,15 +1,10 @@
 import React from "react"
 import { Routes, BrowserRouter, Route } from "react-router-dom"
-import { Provider } from 'react-redux'
 import Home from '../pages/Home/Home'
 import NotFound from '../pages/NotFound/NotFound'
 import getDefaultRoute from "../components/getdefaultroute/getDefaultRoute"
 import { InterfaceRoute, InterfaceRoutes } from "./interfaces"
 import getPrivateRoute from "../components/getPrivateRoute/getPrivateRoute"
-import 'primereact/resources/themes/luna-green/theme.css'
-
-
-
 
 
 const defaultRoutes: InterfaceRoutes = [
