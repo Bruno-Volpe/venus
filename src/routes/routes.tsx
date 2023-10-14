@@ -13,7 +13,7 @@ const defaultRoutes: InterfaceRoutes = [
 
 
 const privateRoutes: InterfaceRoutes = [
-    // {path: FULL_ROUTES_ENUM.DEFAULT.HOME, component: <Home />},
+    // {path: '', component: <Home />},
 ]
 
 
