@@ -71,7 +71,8 @@ function App() {
                 setMedia(await cardDetail.resolveFormula())
                 setPassou(await cardDetail.getStatusMedia())
             } catch (error) {
-                alert.error('Erro ao buscar os dados:');
+                toast.error('Erro ao buscar os dados:');
+                console.log(error);
             }
         }
 

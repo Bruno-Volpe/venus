@@ -79,7 +79,7 @@ class CardDetail {
 }
 
 async function resolverEquacao(expressao, valor) {
-    const result = await axios.post('http://localhost:5000/resolver', {
+    const result = await axios.post('http://apat3.pythonanywhere.com/resolver', {
         expressao,
         valor
     })
@@ -88,7 +88,7 @@ async function resolverEquacao(expressao, valor) {
 }
 
 async function evaluate(expressao) {
-    const result = await axios.post('http://localhost:5000/evaluate', {
+    const result = await axios.post('http://apat3.pythonanywhere.com/evaluate', {
         expressao
     })
 
