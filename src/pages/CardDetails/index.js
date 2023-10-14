@@ -18,7 +18,6 @@ import ModalRemove from '../../components/removeModal';
 
 import './style.css';
 import { toast } from 'react-toastify';
-import { cos } from 'mathjs';
 
 function App() {
     const { id } = useParams()
