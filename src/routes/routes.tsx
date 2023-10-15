@@ -7,6 +7,7 @@ import getPrivateRoute from "../components/getPrivateRoute/getPrivateRoute"
 
 import Home from '../pages/Home/Home'
 import Login from '../pages/Login/Login'
+import CardDetails from '../pages/CardDetails'
 import NotFound from '../pages/NotFound/NotFound'
 
 
@@ -19,7 +20,7 @@ const privateRoutes: InterfaceRoutes = [
     {path: '/', component: <Home />},
     {path: 'storeNewSubject/', component: <Home />},
     {path: 'storeGrades/:id', component: <Home />},
-    {path: 'cardDetails/:id', component: <Home />},
+    {path: 'cardDetails/:id', component: <CardDetails />},
 ]
 
 
