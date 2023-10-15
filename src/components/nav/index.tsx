@@ -19,7 +19,7 @@ function App() {
     const user = auth.currentUser;
     const displayName = user ? user.displayName : '';
 
-    const handleLogout = e => {
+    const handleLogout = (e: React.MouseEvent<HTMLSpanElement>): void => {
         e.preventDefault();
         auth.signOut();
     }
@@ -51,7 +51,7 @@ function App() {
                         </Navbar.Text>
                     </Nav>
                 </Navbar.Collapse>
-                <Navbar.Text onClick={e => handleLogout(e)}>
+                <Navbar.Text onClick={(e)  => handleLogout(e)}>
                     <FontAwesomeIcon icon={faSignOutAlt} className="mx-5 logout" />
                 </Navbar.Text>
             </Container >
