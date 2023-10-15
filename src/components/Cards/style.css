@@ -1,0 +1,22 @@
+.card-container {
+    background-color: #FFFCF2 !important;
+    max-width: 300px;
+    height: 400px !important;
+    margin: 4rem 4rem 0 4rem; /* Adiciona margens ao redor dos cards */
+    cursor: pointer;
+}
+
+.body-card {
+    padding: 36px;
+}
+
+.row-cards {
+    width: 100%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.background-card {
+    margin-top: 0;
+}

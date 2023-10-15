@@ -1,42 +1,5 @@
-@font-face {
-  font-family: 'Roboto-Medium';
-  src: url('../fonts/Roboto-Medium.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Roboto-Light';
-  src: url('../fonts/Roboto-Light.ttf') format('truetype');
-}
-
-* {
+body, html {
+  height: 100%;
   margin: 0;
-}
-
-h1, h2, h3, h4, h5 {
-    font-family: 'Roboto-Medium';
-    font-weight: 500;
-    user-select: none;
-}
-
-.p-sidebar .p-sidebar-header {
-  padding: 0 !important;
-}
-
-button {
-  font-family: 'Roboto-Medium';
-  font-weight: 400;
-}
-
-input[type=button] {
-  font-family: 'Roboto-Medium';
-  font-weight: 400;
-}
-
-input[type=text] {
-    font-family: 'Roboto-Light';
-    font-weight: 200;
-}
-
-label, span, a {
-    font-family: 'Roboto-Light';
-    font-weight: 500;
+  background-color: #FFFCF2 !important;
 }

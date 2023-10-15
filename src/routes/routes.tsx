@@ -6,11 +6,12 @@ import { InterfaceRoute, InterfaceRoutes } from "./interfaces"
 import getPrivateRoute from "../components/getPrivateRoute/getPrivateRoute"
 
 import Home from '../pages/Home/Home'
+import Login from '../pages/Login/Login'
 import NotFound from '../pages/NotFound/NotFound'
 
 
 const defaultRoutes: InterfaceRoutes = [
-    {path: '/login', component: <Home />},
+    {path: '/login', component: <Login />},
 ]
 
 
