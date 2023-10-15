@@ -6,6 +6,8 @@ import { onAuthStateChanged } from 'firebase/auth'
 
 import { Navigate } from 'react-router-dom'
 
+import Nav from '../nav'
+
 function PrivateRoute({ children }) {
     const [loading, setLoading] = useState(true);
     const [signed, setSigned] = useState(false);
@@ -56,6 +58,7 @@ const getPrivateRoute = (index, path, Component) => {
             path={path}
             element={
                 <PrivateRoute>
+                    <Nav />
                     {Component}
                 </PrivateRoute>}
         />
