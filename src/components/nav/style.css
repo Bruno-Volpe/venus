@@ -1,0 +1,33 @@
+.small-logo {
+    width: 80px;
+    max-width: 100px; /* Define a largura máxima da imagem */
+    height: auto; /* A altura será ajustada automaticamente para manter a proporção */
+    margin: 15px 15px 0 0 !important;
+}
+
+.button {
+    background-color: #CCC5B9;
+    border: none;
+    color: #252422;
+    border-radius: 16px;
+    padding: 8px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+    .button:hover {
+        background-color: #EB5E28;
+        color: #FFF;
+    }
+
+svg {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.logout {
+    color: #EB5E28;
+}

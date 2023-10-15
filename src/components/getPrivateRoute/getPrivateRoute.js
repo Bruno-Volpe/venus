@@ -1,11 +1,6 @@
 import React from "react"
-import { Navigate, Route } from "react-router-dom"
-
-
-function PrivateRoute({ children }) {
-    return (true) ? children : <Navigate
-        to={'/login'} />
-}
+import { Route } from "react-router-dom"
+import PrivateRoute from './PrivateRoute';
 
 
 const getPrivateRoute = (index, path, Component) => {
@@ -15,7 +10,6 @@ const getPrivateRoute = (index, path, Component) => {
             path={path}
             element={
                 <PrivateRoute>
-
                     {Component}
                 </PrivateRoute>}
         />
