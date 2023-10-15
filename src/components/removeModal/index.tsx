@@ -8,17 +8,27 @@ import db from '../../service/firebaseConnection';
 
 import { toast } from 'react-toastify';
 
-const ModalComponent = ({ show, setShow, id }) => {
+interface ModalProps {
+    show: boolean,
+    setShow: React.Dispatch<React.SetStateAction<boolean>>,
+    id: string | undefined
+}
+
+const ModalComponent = ({ show, setShow, id }: ModalProps) => {
     const navigator = useNavigate()
 
-    const handleRemove = async (e) => {
+    const handleRemove = async (e: React.MouseEvent) => {
         e.preventDefault();
         try {
+            if (!id) {
+                toast.error("ID do evento não encontrado.");
+                return;
+            }
             const docRef = doc(db, 'subject', id);
             const querySnapshot = await getDoc(docRef);
 
-            if (querySnapshot.empty) {
-                toast.alert("Nenhum evento encontrado com o nome pesquisado.");
+            if (!querySnapshot.exists()) {
+                toast.error("Nenhum evento encontrado com o nome pesquisado.");
                 return;
             }
 

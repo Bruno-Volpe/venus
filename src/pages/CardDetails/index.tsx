@@ -36,6 +36,7 @@ interface Subject {
 
 function App() {
     const { id } = useParams()
+
     const navigate = useNavigate()
 
     const [notas, setNotas] =useState <Notas[]>([])
