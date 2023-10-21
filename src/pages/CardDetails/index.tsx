@@ -1,21 +1,13 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
 import { Container, Row, Col, Button } from 'react-bootstrap';
-
 import { doc, getDoc } from "firebase/firestore";
 import db from '../../service/firebaseConnection';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle, faCog, faBook, faTrash, } from '@fortawesome/free-solid-svg-icons';
-
 import { BlockMath } from 'react-katex';
-
 import CardDetail from '../../utils/cardDetail';
-
-import Nav from '../../components/nav';
 import ModalRemove from '../../components/removeModal';
-
 import './style.css';
 import { toast } from 'react-toastify';
 
@@ -108,8 +100,6 @@ function App() {
 
     return (
         <>
-            <Nav />
-
             <Container className='mt-5 responsive'>
                 <>
                     <ModalRemove id={id} setShow={setShowRemoveModal} show={showRemoveModal} />
