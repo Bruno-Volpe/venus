@@ -17,7 +17,7 @@ function App() {
     const [subjectName, setSubjectName] = useState('');
     const [techerName, setTecherName] = useState('');
     const [techerEmail, setTecherEmail] = useState('');
-    const [media, setmedia] = useState(0);
+    const [media, setmedia] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
 
     const [loading, setLoading] = useState(false);
