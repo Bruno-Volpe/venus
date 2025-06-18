@@ -55,6 +55,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/plugin-transform-private-property-in-object": "^7.22.11"
+    "@babel/plugin-transform-private-property-in-object": "^7.22.11",
+    "@playwright/test": "^1.53.0"
   }
 }
