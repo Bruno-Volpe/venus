@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 removeme/*
+test-results/*
+playwright-report/*
