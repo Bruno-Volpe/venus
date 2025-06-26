@@ -17,6 +17,7 @@
     "katex": "^0.16.8",
     "mathjs": "^11.11.1",
     "mdb-react-ui-kit": "^6.3.0",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.0",
     "react-dom": "^18.2.0",

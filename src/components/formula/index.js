@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import 'katex/dist/katex.min.css';
 import { BlockMath } from 'react-katex';
 import { FloatingLabel, Form, Row, Col, Button } from 'react-bootstrap';
@@ -47,6 +48,12 @@ const MathInput = ({ setFormula, formula }) => {
             </div>
         </div>
     );
+};
+
+// Validação de props
+MathInput.propTypes = {
+    setFormula: PropTypes.func.isRequired,
+    formula: PropTypes.string.isRequired
 };
 
 export default MathInput;

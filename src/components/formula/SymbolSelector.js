@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import 'katex/dist/katex.min.css';
 import { BlockMath } from 'react-katex';
@@ -36,6 +37,11 @@ const SymbolSelector = ({ onSelect }) => {
             </Row>
         </Container>
     );
+};
+
+// Validação de props
+SymbolSelector.propTypes = {
+    onSelect: PropTypes.func.isRequired
 };
 
 export default SymbolSelector;
