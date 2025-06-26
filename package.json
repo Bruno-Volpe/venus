@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
     "bootstrap": "^5.3.2",
+    "dotenv": "^16.5.0",
     "firebase": "^10.4.0",
     "firebase-tools": "^12.7.0",
     "framer-motion": "^11.0.8",
@@ -31,7 +32,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build && echo '/* /index.html  200' | cat >build/_redirects ",
     "test:unit": "jest tests/unit/ --config=jest.config.js",
-    "test:e2e": "playwright test tests/",
+    "test:e2e": "playwright test tests/e2e/",
     "test": "npm run test:unit && npm run test:e2e",
     "eject": "react-scripts eject"
   },
