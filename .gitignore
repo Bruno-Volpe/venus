@@ -25,3 +25,5 @@ yarn-error.log*
 removeme/*
 test-results/*
 playwright-report/*
+.env
+.env
