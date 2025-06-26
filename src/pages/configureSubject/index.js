@@ -43,7 +43,7 @@ function FormFloatingBasicExample() {
                     setDatas(docSnap.data().notas.map(el => el.dueDate))
                 }
             } catch (error) {
-                toast.error('Erro ao buscar os dados');
+                toast.error('Erro ao buscar os dados.');
             }
         }
 
@@ -68,25 +68,19 @@ function FormFloatingBasicExample() {
     const formValidate = () => {
         // Check if the formula is not empty
         if (formula.trim() === '') {
-            toast.error('Please enter a formula.');
+            toast.error('Por favor, insira uma fórmula.');
             return false;
         }
 
         if (quantidadeProvas <= 0) {
-            toast.error('Quantidade de prova invalida')
+            toast.error('Quantidade de prova inválida.');
             return false
         }
 
         if (cardDetail.checkVariableCount() === false) {
-            toast.error('Quantidade de prova na formula invalida')
+            toast.error('Quantidade de prova na fórmula inválida.');
             return false
         }
-
-        // Check if all notas are filled
-        // if (notas.some(nota => nota === '')) {
-        //     toast.error('Please fill in all nota fields.');
-        //     return false;
-        // }
 
         return true;
     }
@@ -113,7 +107,7 @@ function FormFloatingBasicExample() {
 
             toast.success('Notas adicionadas com sucesso!');
             navigate(`/cardDetails/${id}`)
-        } catch (err) {
+        } catch (error) {
             toast.error('Erro ao adicionar notas. Tente novamente mais tarde.');
         }
     }

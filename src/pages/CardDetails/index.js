@@ -73,7 +73,7 @@ function App() {
                 setPassou(await cardDetail.getStatusMedia())
                 setLoading(true)
             } catch (error) {
-                toast.error('Erro ao buscar os dados:');
+                toast.error('Erro ao buscar os dados.');
                 console.log(error);
             }
         }

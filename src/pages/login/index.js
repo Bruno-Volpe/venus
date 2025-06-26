@@ -29,7 +29,7 @@ function App() {
                 navigate('/', { replace: true })
             })
             .catch((error) => {
-                toast.error("Erro ao logar, tente novamente mais tarde!");
+                toast.error("Erro ao fazer login, tente novamente mais tarde.");
                 navigate('/')
             });
     }

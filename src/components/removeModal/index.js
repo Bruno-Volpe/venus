@@ -26,8 +26,8 @@ const ModalComponent = ({ show, setShow, id }) => {
             await deleteDoc(querySnapshot.ref)
             navigator('/')
             toast.success('Evento deletado com sucesso!');
-        } catch (err) {
-            toast.error("Erro ao deletar evento, tente novamente mais tarde");
+        } catch (error) {
+            toast.error("Erro ao deletar evento, tente novamente mais tarde.");
         }
     }
 
