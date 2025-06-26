@@ -23,8 +23,8 @@ function Cards() {
                     ...doc.data()
                 }));
                 setSubjects(subjectData);
-            } catch (err) {
-                console.log(err);
+            } catch (error) {
+                console.log(error);
             }
         }
 

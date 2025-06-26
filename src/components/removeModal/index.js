@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap';
 
 import { useNavigate } from 'react-router-dom';
@@ -25,8 +26,9 @@ const ModalComponent = ({ show, setShow, id }) => {
             await deleteDoc(querySnapshot.ref)
             navigator('/')
             toast.success('Evento deletado com sucesso!');
-        } catch (err) {
-            toast.error("Erro ao deletar evento, tente novamente mais tarde");
+        } catch (error) {
+            console.error('Erro ao deletar documento:', error);
+            toast.error("Erro ao deletar evento, tente novamente mais tarde.");
         }
     }
 
@@ -51,5 +53,12 @@ const ModalComponent = ({ show, setShow, id }) => {
         </>
     );
 }
+
+// Validação de props
+ModalComponent.propTypes = {
+    show: PropTypes.bool.isRequired,
+    setShow: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired
+};
 
 export default ModalComponent;

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import Nav from '../../components/nav';
 import resizeImage from '../../util/resizeImg'; // Importando a função
-// import SearchImages from '../../components/searchImage';
 
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -42,9 +41,7 @@ function App() {
         }
 
         if (typeof media !== 'number') {
-            try {
-                parseFloat(media)
-            } catch (err) {
+            if (isNaN(parseFloat(media))) {
                 errorMessage = 'A média deve ser um número';
             }
         };
@@ -86,7 +83,8 @@ function App() {
                 } else {
                     toast.warning('Selecione uma imagem');
                 }
-            } catch (err) {
+            } catch (error) {
+                console.error('Erro ao criar matéria:', error);
                 toast.error('Erro ao adicionar matéria. Tente novamente mais tarde.');
             } finally {
                 setLoading(false);

@@ -1,17 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import 'katex/dist/katex.min.css';
 import { BlockMath } from 'react-katex';
 import { FloatingLabel, Form, Row, Col, Button } from 'react-bootstrap';
 
-//import SymbolSelector from './SymbolSelector';
-
 import './style.css'
 
 const MathInput = ({ setFormula, formula }) => {
-    // const handleSymbolSelect = (symbol) => {
-    //     setFormula(formula + symbol);
-    // }
-
     const handleExample = (e) => {
         e.preventDefault();
         setFormula('(n1 + n2) / 2');
@@ -32,7 +27,6 @@ const MathInput = ({ setFormula, formula }) => {
                 <Row className="d-flex align-items-center justify-content-center">
                     <Col xs={12} className="text-center d-flex justify-content-center align-items-center">
                         <div className="menu-Symbol">
-                            {/* <SymbolSelector onSelect={handleSymbolSelect} /> */}
                             <small>Coloque n(x) para p(x)</small>
                             <Button onClick={e => handleExample(e)} id="exemplo-botao">Exemplo</Button>
                         </div>
@@ -47,6 +41,12 @@ const MathInput = ({ setFormula, formula }) => {
             </div>
         </div>
     );
+};
+
+// Validação de props
+MathInput.propTypes = {
+    setFormula: PropTypes.func.isRequired,
+    formula: PropTypes.string.isRequired
 };
 
 export default MathInput;

@@ -1,5 +1,4 @@
 import axios from 'axios'
-//import { simplify } from 'mathjs';
 
 class CardDetail {
     constructor(
