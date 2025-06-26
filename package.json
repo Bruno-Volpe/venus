@@ -7,8 +7,6 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
     "bootstrap": "^5.3.2",
@@ -32,7 +30,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && echo '/* /index.html  200' | cat >build/_redirects ",
-    "test": "react-scripts test",
+    "test:unit": "jest tests/unit/ --config=jest.config.js",
+    "test:e2e": "playwright test tests/",
+    "test": "npm run test:unit && npm run test:e2e",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -54,8 +54,22 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.27.4",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-syntax-jsx": "^7.27.1",
+    "@babel/plugin-transform-modules-commonjs": "^7.27.1",
     "@babel/plugin-transform-private-property-in-object": "^7.22.11",
-    "@playwright/test": "^1.53.0"
+    "@babel/plugin-transform-runtime": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/runtime": "^7.27.6",
+    "@playwright/test": "^1.53.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^16.3.0",
+    "babel-jest": "^30.0.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.6.3",
+    "jest-environment-jsdom": "^26.6.2",
+    "jsdom": "^26.1.0"
   }
 }
