@@ -1,4 +1,4 @@
-const validateSubject = require('../../src/utils/validateSubject');
+const { validateSubject } = require('../../src/util/validateSubject');
 
 describe('Validação de Disciplina', () => {
   test('deve retornar erro quando o nome da disciplina estiver vazio', () => {
