@@ -59,7 +59,6 @@ function App() {
                     setSubject(docSnap.data());
                     setNotas(docSnap.data().notas);
 
-                    // Check subject.formula inside the function
                     if (docSnap.data().formula === '' || docSnap.data().formula === undefined) {
                         return navigate(`/storeGrades/${id}`)
                     }

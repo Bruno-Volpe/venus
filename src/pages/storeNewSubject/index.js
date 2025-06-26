@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import Nav from '../../components/nav';
 import resizeImage from '../../util/resizeImg'; // Importando a função
-// import SearchImages from '../../components/searchImage';
 
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
