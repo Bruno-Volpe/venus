@@ -1,6 +1,7 @@
 const mockAxios = {
   post: jest.fn((url, data) => {
-    return Promise.resolve({ data: { result: eval(data.expression) } });
+    // Simula um resultado fixo para evitar uso de eval e problemas de segurança
+    return Promise.resolve({ data: { result: 42 } });
   })
 };
 
