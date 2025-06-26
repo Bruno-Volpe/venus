@@ -41,9 +41,7 @@ function App() {
         }
 
         if (typeof media !== 'number') {
-            try {
-                parseFloat(media)
-            } catch (error) {
+            if (isNaN(parseFloat(media))) {
                 errorMessage = 'A média deve ser um número';
             }
         };
@@ -86,6 +84,7 @@ function App() {
                     toast.warning('Selecione uma imagem');
                 }
             } catch (error) {
+                console.error('Erro ao criar matéria:', error);
                 toast.error('Erro ao adicionar matéria. Tente novamente mais tarde.');
             } finally {
                 setLoading(false);

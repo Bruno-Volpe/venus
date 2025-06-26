@@ -108,6 +108,7 @@ function FormFloatingBasicExample() {
             toast.success('Notas adicionadas com sucesso!');
             navigate(`/cardDetails/${id}`)
         } catch (error) {
+            console.error('Erro ao salvar notas no Firestore:', error);
             toast.error('Erro ao adicionar notas. Tente novamente mais tarde.');
         }
     }

@@ -27,6 +27,7 @@ const ModalComponent = ({ show, setShow, id }) => {
             navigator('/')
             toast.success('Evento deletado com sucesso!');
         } catch (error) {
+            console.error('Erro ao deletar documento:', error);
             toast.error("Erro ao deletar evento, tente novamente mais tarde.");
         }
     }
